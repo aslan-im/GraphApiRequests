@@ -1,4 +1,4 @@
-function Get-DeviceAuthToken {
+function Get-GraphDeviceAuthToken {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$false)]
@@ -7,28 +7,30 @@ function Get-DeviceAuthToken {
 
         [Parameter(Mandatory)]
         [string]
-        $TenantUrl,
+        $TenantName,
 
         [Parameter(Mandatory)]
         [string]
         $AppId
     )
-    . $PSScriptRoot\..\Private\New-AuthFormWindow.ps1
-    . $PSScriptRoot\..\Private\Get-DeviceAuthCode.ps1
+    . $PSScriptRoot\..\Private\New-GraphAuthFormWindow.ps1
+    . $PSScriptRoot\..\Private\Get-GraphDeviceAuthCode.ps1
+
+    $TenantUrl = "$TenantName.onmicrosoft.com"
 
     $AuthUrl = "https://login.microsoftonline.com/$TenantUrl"
 
     $CodeRequestSplat = @{
-        TenantUrl = $TenantUrl
+        TenantName = $TenantName
         AppId = $AppId
     }
 
-    $DeviceCodeObject = Get-DeviceAuthCode @CodeRequestSplat
+    $DeviceCodeObject = Get-GraphDeviceAuthCode @CodeRequestSplat
     Write-Output $DeviceCodeObject.message
     $Code = ($DeviceCodeObject.message -split "code " | Select-Object -Last 1) -split " to authenticate."
     Set-Clipboard -Value $Code
 
-    New-AuthFormWindow
+    New-GraphAuthFormWindow
 
     $TokenParamsSplat = @{
         Method = "POST"

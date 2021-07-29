@@ -1,7 +1,7 @@
 BeforeAll{
-    . $PSScriptRoot\..\Functions\Private\Get-DeviceAuthCode.ps1
+    . $PSScriptRoot\..\Functions\Private\Get-GraphDeviceAuthCode.ps1
 }
-Describe "Get-DeviceAuthCode" {
+Describe "Get-GraphDeviceAuthCode" {
     BeforeAll{
         $ResponseObject = [PSCustomObject]@{
             user_code = "DBL79WLXV"
@@ -20,10 +20,10 @@ Describe "Get-DeviceAuthCode" {
         }
 
         $Splat = @{
-            TenantUrl = $((New-Guid).Guid)
+            TenantName = $((New-Guid).Guid)
             AppId = $((New-Guid).Guid)
         }
 
-        Get-DeviceAuthCode @Splat | Should -be $ResponseObject
+        Get-GraphDeviceAuthCode @Splat | Should -be $ResponseObject
     }
 }

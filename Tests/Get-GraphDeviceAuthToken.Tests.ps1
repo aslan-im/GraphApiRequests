@@ -1,9 +1,9 @@
 BeforeAll{
-    . $PSScriptRoot\..\Functions\Public\Get-DeviceAuthToken.ps1
-    . $PSScriptRoot\..\Functions\Private\Get-DeviceAuthCode.ps1
-    . $PSScriptRoot\..\Functions\Private\New-AuthFormWindow.ps1
+    . $PSScriptRoot\..\Functions\Public\Get-GraphDeviceAuthToken.ps1
+    . $PSScriptRoot\..\Functions\Private\Get-GraphDeviceAuthCode.ps1
+    . $PSScriptRoot\..\Functions\Private\New-GraphAuthFormWindow.ps1
 }
-Describe "Get-DeviceAuthToken" {
+Describe "Get-GraphDeviceAuthToken" {
     BeforeAll{
         $DeviceCodeObject = [PSCustomObject]@{
             user_code = "DBL79WLXV"
@@ -28,11 +28,11 @@ Describe "Get-DeviceAuthToken" {
             id_token = "T0k3N1D"
         }
 
-        Mock Get-DeviceAuthCode{
+        Mock Get-GraphDeviceAuthCode{
             return $DeviceCodeObject
         }
 
-        Mock New-AuthFormWindow{
+        Mock New-GraphAuthFormWindow{
             return
         }
 
@@ -44,14 +44,14 @@ Describe "Get-DeviceAuthToken" {
             return
         }
 
-        $TokenRequstSplat = @{
+        $TokenRequestSplat = @{
             AppId = $((New-Guid).Guid)
-            TenantUrl = 'contoso.onmicrosoft.com'
+            TenantName = 'contoso'
         }
         
     }
     It "It returns token" {
-        Get-DeviceAuthToken @TokenRequstSplat | Should -be $TokenObject
+        Get-GraphDeviceAuthToken @TokenRequestSplat | Should -be $TokenObject
     }
     
 }

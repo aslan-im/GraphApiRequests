@@ -1,4 +1,4 @@
-function Get-DeviceAuthCode {
+function Get-GraphDeviceAuthCode {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$false)]
@@ -7,13 +7,14 @@ function Get-DeviceAuthCode {
 
         [Parameter(Mandatory)]
         [string]
-        $TenantUrl,
+        $TenantName,
 
         [Parameter(Mandatory)]
         [string]
         $AppId
     )
     
+    $TenantUrl = "$TenantName.onmicrosoft.com"
     $AuthUrl = "https://login.microsoftonline.com/$TenantUrl"
 
     $PostSPlat = @{

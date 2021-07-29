@@ -2,7 +2,7 @@ function Invoke-GraphApiRequest {
 
     [CmdletBinding()]
     param (
-        [Parameter()]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]
         $Token, 
         

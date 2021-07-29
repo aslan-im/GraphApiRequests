@@ -1,4 +1,4 @@
-function New-AuthFormWindow {
+function New-GraphAuthFormWindow {
     [CmdletBinding()]
     param (     
     )
