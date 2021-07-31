@@ -83,4 +83,4 @@ About more possible resources you can read in official [Microsoft documentation]
 
 ## Disclaimer
 
-The author of the module is not responsible for any damage caused to your infrastructure as a result of the module's operation. USE IT ON YOUR OWN RISK!
+Author of the module is not responsible for any damage caused to your infrastructure as a result of the module's operation. USE IT ON YOUR OWN RISK!
