@@ -45,7 +45,7 @@ function Invoke-GraphApiRequest {
         
         [Parameter(Mandatory=$True)]
         [string]
-        $Resource = $(Throw '-Resource param is required'), 
+        $Resource, 
         
         [Parameter()]
         [string]
