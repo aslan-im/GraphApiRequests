@@ -29,7 +29,7 @@ There are the pre-requisites for using this type of authorization:
 #### Usage Example
 
 ```PowerShell
-PS C:\> $Token = $Get-GraphDeviceAuthToken -TenantName 'contoso' -AppId '246c7445-eee6-4d60-968d-f83d67183753'
+PS C:\> $Token = Get-GraphDeviceAuthToken -TenantName 'contoso' -AppId '246c7445-eee6-4d60-968d-f83d67183753'
 ```
 
 Getting the device auth token for Contoso tenant using application ID registered in Azure AD
@@ -41,7 +41,7 @@ For using this auth method, you need to generate Client Secret (AppSecret) in ap
 #### Usage Example
 
 ```PowerShell
-PS C:\> $Token = $Get-GraphToken -AppId '246c7445-eee6-4d60-968d-f83d67183753' -AppSecret '6R[O)5D8sHZ^pt"3' -TenantId 'd1ee13a4-c9d0-4ab0-bff5-c011dfc20717'
+PS C:\> $Token = Get-GraphToken -AppId '246c7445-eee6-4d60-968d-f83d67183753' -AppSecret '6R[O)5D8sHZ^pt"3' -TenantId 'd1ee13a4-c9d0-4ab0-bff5-c011dfc20717'
 ```
 
 Example of getting a token using AppId, AppSecret and TenantId
