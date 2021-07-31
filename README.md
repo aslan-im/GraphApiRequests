@@ -1,4 +1,4 @@
-![UnitTests](https://github.com/aslan-im/GraphApiRequests/actions/workflows/UnitTests.yml/badge.svg)
+[![GraphApiRequests](https://github.com/aslan-im/GraphApiRequests/actions/workflows/blank.yml/badge.svg?branch=main)](https://github.com/aslan-im/GraphApiRequests/actions/workflows/blank.yml)
 ## Overview
 
 This is a module for invoking any Microsoft Graph Requests. To use this module you need to be familiar with [Microsoft Docs](https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta) site where you can find all possible resources for requests.
