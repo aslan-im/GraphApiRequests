@@ -1,4 +1,4 @@
-# Overview
+## Overview
 
 This is a module for invoking any Microsoft Graph Requests. To use this module you need to be familiar with [Microsoft Docs](https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta) site where you can find all possible resources for requests.
 
@@ -6,10 +6,17 @@ This is a module for invoking any Microsoft Graph Requests. To use this module y
 
 GraphAPIRequests supports all type of the requests. You do not need to create a headers, this module will do all things instead of you. Just select required resource, register the application, get the token and run Invoke-GraphApiRequest.
 
-
 ## Getting Started (Quickstart)
 
-To start using this module you need firstly need to register the Graph API application in your Azure AD following this [instruction](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
+Download the latest release and import module to your powershell session:
+
+```PowerShell
+PS C:\> Import-Module <path_to_module>\GraphApiRequests.psd1
+```
+
+### About the permissions
+
+To start using this module you need to register the Graph API application in your Azure AD following this [instruction](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
 
 There are two types of the permissions:
 
@@ -83,4 +90,4 @@ About more possible resources you can read in official [Microsoft documentation]
 
 ## Disclaimer
 
-Author of the module is not responsible for any damage caused to your infrastructure as a result of the module's operation. USE IT ON YOUR OWN RISK!
+Author is not responsible for any damage caused to your infrastructure as a result of the module's operation. USE IT ON YOUR OWN RISK!
