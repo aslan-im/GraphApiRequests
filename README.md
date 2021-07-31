@@ -4,7 +4,7 @@ This is a module for invoking any Microsoft Graph Requests. To use this module y
 
 ## Synopsis
 
-GraphAPIRequests supports all type of the requests. You do not need to create a headers, this module will do all things instead of you. Just select required resource, register the application, get the token and run Invoke-GraphApiRequest.
+GraphAPIRequests supports all type of the requests. You do not need to create the headers, this module will do all the things instead of you! Just select required resource, register the application, get the token and run Invoke-GraphApiRequest.
 
 ## Getting Started (Quickstart)
 
