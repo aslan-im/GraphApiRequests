@@ -26,9 +26,6 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Perform a Pester test from the command-line
-        shell: pwsh
-        run: Test-Path resultsfile.log | Should -Be $true
       - name: Perform a Pester test from the Tests.ps1 file
         shell: pwsh
         run: |
