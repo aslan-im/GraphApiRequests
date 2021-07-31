@@ -1,10 +1,10 @@
 # Overview
 
-It is a module for invoking any Microsoft Graph Requests. To use this module you need to be familiar with [Microsoft Docs](https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta) site where you can find all possible resources for requests.
+This is a module for invoking any Microsoft Graph Requests. To use this module you need to be familiar with [Microsoft Docs](https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta) site where you can find all possible resources for requests.
 
 ## Synopsis
 
-GraphAPIRequests supports all type of the requests, because it is just a tool for the easy creating Graph API scripts with no requirements to create a headers and write token getting scripts again and again.
+GraphAPIRequests supports all type of the requests. You do not need to create a headers, this module will do all things instead of you. Just select required resource, register the application, get the token and run Invoke-GraphApiRequest.
 
 
 ## Getting Started (Quickstart)
