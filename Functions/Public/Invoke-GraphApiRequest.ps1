@@ -1,3 +1,40 @@
+<#
+.SYNOPSIS
+    Function to invoke Graph API Request
+.DESCRIPTION
+    Using this function you can invoke any request to the Graph API both versions
+.EXAMPLE
+    PS C:\> $Token = Get-GraphToken -AppId 246c7445-eee6-4d60-968d-f83d67183753 -AppSecret ?2mwmHICkx8j -TenantID d1ee13a4-c9d0-4ab0-bff5-c011dfc20717
+    PS C:\> Invoke-GraphApiRequest -Token $Token -Resource groups -Method Get
+    Example of using Invoke-GraphApiRequest to get the list of Azure AD Groups. In this example first command is required to get the token using app secret.
+.EXAMPLE
+    PS C:\> $BodyObject = [PSCustomObject]@{
+        description = "Self help community for golf"
+        displayName = "Golf Assist"
+        groupTypes = @(
+            "Unified"
+        )
+        mailEnabled = $true
+        mailNickname = "golfassist"
+        securityenabled = $false
+    }
+    PS C:\> $BodyJson = ConvertTo-Json $BodyObject
+    PS C:\> $Token = Get-GraphToken -AppId 246c7445-eee6-4d60-968d-f83d67183753 -AppSecret ?2mwmHICkx8j -TenantID d1ee13a4-c9d0-4ab0-bff5-c011dfc20717
+    PS C:\> Invoke-GraphApiRequest -Token $Token -Resource groups -Method POST -Body $BodyJson
+    Steps in this example:
+        1. Creating a PSCustomObject with payload of MailEnalbed Security Group
+        2. Converting PSCustomObject to Json
+        3. Getting the token using Secret (if you already have a token and it is not expired, this step can be skipped)
+        4. Invoking a request to the Graph API for creating a new group with predefined properties   
+.INPUTS
+    None. You cannot pipe objects to Get-GraphDeviceAuthToke
+.OUTPUTS
+    Usually it is JSON
+.LINK
+    Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Invoke-GraphApiRequest.ps1
+.LINK 
+    Source code of whole project: https://github.com/aslan-im/GraphApiRequests
+#>
 function Invoke-GraphApiRequest {
 
     [CmdletBinding()]
