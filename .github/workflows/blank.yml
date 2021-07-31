@@ -29,6 +29,6 @@ jobs:
       - name: Perform a Pester test from the Tests.ps1 file
         shell: pwsh
         run: |
-          Install-Module Pester -version 5.2.2
+          Install-Module Pester -requiredversion 5.2.2
           $TestResult = Invoke-Pester $PSScriptRoot\..\..\Tests\Invoke-AllTests.ps1 -Passthru
           $TestResult.Result | Should -be 'Passed'
