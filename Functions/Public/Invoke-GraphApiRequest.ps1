@@ -46,10 +46,6 @@ function Invoke-GraphApiRequest {
         [Parameter(Mandatory=$True)]
         [string]
         $Resource, 
-        
-        [Parameter()]
-        [string]
-        $ApiUrl = 'https://graph.microsoft.com',
 
         [Parameter(Mandatory=$false)]
         [ValidateSet('beta', 'v1.0')]
@@ -75,7 +71,11 @@ function Invoke-GraphApiRequest {
 
         [Parameter(Mandatory=$false)]
         [string]
-        $AppSecret
+        $AppSecret,
+
+        [Parameter(Mandatory=$false)]
+        [string]
+        $ApiUrl = 'https://graph.microsoft.com'
     )
 
     . $PSScriptRoot\Get-GraphToken.ps1

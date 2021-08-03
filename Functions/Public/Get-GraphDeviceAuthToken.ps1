@@ -26,17 +26,17 @@
 function Get-GraphDeviceAuthToken {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory)]
         [string]
-        $ApiUrl = "https://graph.microsoft.com/",
+        $AppId,
 
         [Parameter(Mandatory)]
         [string]
         $TenantName,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory=$false)]
         [string]
-        $AppId
+        $ApiUrl = "https://graph.microsoft.com/"
     )
     . $PSScriptRoot\..\Private\New-GraphAuthFormWindow.ps1
     . $PSScriptRoot\..\Private\Get-GraphDeviceAuthCode.ps1
