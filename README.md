@@ -10,10 +10,10 @@ GraphAPIRequests supports all type of the requests. You do not need to create th
 
 ## Getting Started (Quickstart)
 
-Download the latest release and import module to your powershell session:
+Install the latest module version from PSGallery using:
 
 ```PowerShell
-PS C:\> Import-Module <path_to_module>\GraphApiRequests.psd1
+PS C:\> Install-Module GraphApiRequests
 ```
 
 ### About the permissions
