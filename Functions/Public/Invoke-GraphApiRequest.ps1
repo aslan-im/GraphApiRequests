@@ -126,7 +126,14 @@ function Invoke-GraphApiRequest {
 
     try {
         $ResultResponse = Invoke-RestMethod @PostSplat -ErrorAction Stop
-        $Result = $ResultResponse
+
+        if($($ResultResponse.value)){
+            $Result = $ResultResponse.value
+        }
+        else{
+            $Result = $ResultResponse
+        }
+
         $ResultNextLink = $ResultResponse."@odata.nextLink"
         $page = $null
 
@@ -143,7 +150,14 @@ function Invoke-GraphApiRequest {
 
                 $ResultResponse = Invoke-RestMethod @PostSplat -ErrorAction Stop
                 $ResultNextLink = $ResultResponse."@odata.nextLink"
-                $Result += $ResultResponse
+
+                if($($ResultResponse.value)){
+                    $Result += $ResultResponse.value
+                }
+                else{
+                    $Result += $ResultResponse
+                }
+
                 $page += 1
                 Write-Output "Collecting data"
                 Write-Output "Processing page number $page"
