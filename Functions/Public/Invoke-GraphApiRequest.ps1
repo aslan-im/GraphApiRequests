@@ -135,7 +135,6 @@ function Invoke-GraphApiRequest {
         }
 
         $ResultNextLink = $ResultResponse."@odata.nextLink"
-        $page = $null
 
         if ($ResultNextLink) {
 
@@ -157,10 +156,6 @@ function Invoke-GraphApiRequest {
                 else{
                     $Result += $ResultResponse
                 }
-
-                $page += 1
-                Write-Output "Collecting data"
-                Write-Output "Processing page number $page"
             }
 
         }
