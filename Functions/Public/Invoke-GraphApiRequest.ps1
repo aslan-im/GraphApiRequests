@@ -127,15 +127,18 @@ function Invoke-GraphApiRequest {
     try {
         $ResultResponse = Invoke-RestMethod @PostSplat -ErrorAction Stop
 
-        if($($ResultResponse.value)){
+        if([bool]($ResultResponse -match "value")){
             $Result = $ResultResponse.value
         }
         else{
             $Result = $ResultResponse
         }
+        
 
-        $ResultNextLink = $ResultResponse."@odata.nextLink"
-
+        if([bool]($ResultResponse -match "@odata.nextLink")){
+            $ResultNextLink = $ResultResponse."@odata.nextLink"
+        }
+            
         if ($ResultNextLink) {
 
             while ($null -ne $ResultNextLink){
@@ -150,12 +153,7 @@ function Invoke-GraphApiRequest {
                 $ResultResponse = Invoke-RestMethod @PostSplat -ErrorAction Stop
                 $ResultNextLink = $ResultResponse."@odata.nextLink"
 
-                if($($ResultResponse.value)){
-                    $Result += $ResultResponse.value
-                }
-                else{
-                    $Result += $ResultResponse
-                }
+                $Result += $ResultResponse.value
             }
 
         }
