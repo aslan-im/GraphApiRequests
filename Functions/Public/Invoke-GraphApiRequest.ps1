@@ -106,6 +106,10 @@ function Invoke-GraphApiRequest {
         break
     }
 
+    if ($Resource[0] -eq '/') {
+        $Resource = $Resource -replace '^.'
+    }
+
     $Url = "$ApiUrl/$ApiVersion/$($Resource)"
 
     $Header = @{
@@ -122,7 +126,8 @@ function Invoke-GraphApiRequest {
     if ($Body) {
         $PostSplat.Add('Body', $Body)
     }
-
+    
+    $Result = @()
 
     try {
         $ResultResponse = Invoke-RestMethod @PostSplat -ErrorAction Stop
