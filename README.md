@@ -59,7 +59,7 @@ Example of getting a token using AppId, AppSecret and TenantId
 
 For invoking Graph request you need firstly to get the token using one of the showed examples above.
 
-When you get the token to $Token variable, you can try to get the some user info:
+When you got the token to $Token variable, you can try to get some user info:
 
 ```PowerShell
 PS C:\> Invoke-GraphApiRequest -Token $Token -Resource 'users/admin@contoso.com' -Method Get
