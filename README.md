@@ -34,6 +34,7 @@ There are the pre-requisites for using this type of authorization:
 - Redirect URIs should be configured in your application as 'Mobile and desktop applications'
 - "https://localhost" should be added as Redirect URI
 - Permission assigned to application should be "Delegated"
+- Manifest parameter "allowPublicClient" should be set to "true"
 
 #### Usage Example
 
