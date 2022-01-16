@@ -17,7 +17,7 @@ jobs:
         shell: pwsh
         run: |
           $Modules = @(
-            "Pester", "PSSCriptAnalyzer", "InvokeBuild", "platyPS"
+            "Pester", "PSSCriptAnalyzer", "InvokeBuild"
           )
           Set-PSRepository PSGallery -InstallationPolicy Trusted
           Install-Module $Modules -ErrorAction Stop
