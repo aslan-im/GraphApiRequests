@@ -1,5 +1,5 @@
 BeforeAll{
-    . $PSScriptRoot\..\Functions\Private\Get-GraphDeviceAuthCode.ps1
+    . $PSScriptRoot\..\Source\Private\Get-GraphDeviceAuthCode.ps1
 }
 Describe "Get-GraphDeviceAuthCode" {
     BeforeAll{

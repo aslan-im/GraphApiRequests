@@ -1,5 +1,5 @@
 BeforeAll{
-    . $PSScriptRoot\..\Functions\Public\Invoke-GraphApiRequest.ps1
+    . $PSScriptRoot\..\Source\Public\Invoke-GraphApiRequest.ps1
 }
 
 Describe "Invoke-GraphApiRequest" {

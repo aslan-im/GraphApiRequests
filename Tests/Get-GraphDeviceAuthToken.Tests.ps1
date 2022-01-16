@@ -1,7 +1,7 @@
 BeforeAll{
-    . $PSScriptRoot\..\Functions\Public\Get-GraphDeviceAuthToken.ps1
-    . $PSScriptRoot\..\Functions\Private\Get-GraphDeviceAuthCode.ps1
-    . $PSScriptRoot\..\Functions\Private\New-GraphAuthFormWindow.ps1
+    . $PSScriptRoot\..\Source\Public\Get-GraphDeviceAuthToken.ps1
+    . $PSScriptRoot\..\Source\Private\Get-GraphDeviceAuthCode.ps1
+    . $PSScriptRoot\..\Source\Private\New-GraphAuthFormWindow.ps1
 }
 Describe "Get-GraphDeviceAuthToken" {
     BeforeAll{

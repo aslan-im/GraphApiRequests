@@ -1,5 +1,5 @@
 BeforeAll{
-    . $PSScriptRoot\..\Functions\Public\Get-GraphToken.ps1
+    . $PSScriptRoot\..\Source\Public\Get-GraphToken.ps1
 }
 
 Describe "Get-GraphToken" {
