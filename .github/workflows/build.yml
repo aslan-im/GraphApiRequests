@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo code
+        uses: actions/checkout@v2
+      
+      - name: Install required PowerShell modules
+        if: steps.cacher.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          $Modules = @(
+            "Pester", "PSSCriptAnalyzer", "InvokeBuild"
+          )
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module $Modules -ErrorAction Stop
+      
+      - name: Invoke Build
+        shell: pwsh
+        run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
+
+      - name: Perform a pester tests
+        run: |
+          Invoke-Pester .\Tests\*.Tests.ps1 -Output Detailed
+        shell: pwsh
+      
+      - name: Push changes to Git Repository
+        run: |
+          git config --global user.name 'aslan-im'
+          git config --global user.email 'skif.white@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}
+          git add .
+          git commit -am "Pushing Artifacts"
+          git push
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          name: module-artifact # Naming the powershell module artifact
+          path: ./Output/ # Saving the powershell module artifact to the path ./Output/
