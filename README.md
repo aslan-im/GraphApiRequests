@@ -1,5 +1,5 @@
 # GraphApiRequests
-[![UnitTests](https://github.com/aslan-im/GraphApiRequests/actions/workflows/UnitTests.yml/badge.svg?branch=main)](https://github.com/aslan-im/GraphApiRequests/actions/workflows/UnitTests.yml)   
+[![Build](https://github.com/aslan-im/GraphApiRequests/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/aslan-im/GraphApiRequests/actions/workflows/build.yml)   
 Simple Microsoft Graph API requests module
 ## Overview
  To use this module you need to be familiar with [Microsoft Docs](https://docs.microsoft.com/en-us/graph/api/overview?view=graph-rest-beta) site where you can find all possible resources for requests.
