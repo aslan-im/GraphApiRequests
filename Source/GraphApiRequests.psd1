@@ -89,11 +89,7 @@ AliasesToExport = @()
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = '.\Private\Get-GraphDeviceAuthCode.ps1', 
-               '.\Private\New-GraphAuthFormWindow.ps1', 
-               '.\Public\Get-GraphToken.ps1', 
-               '.\Public\Get-GraphDeviceAuthToken.ps1', 
-               '.\Public\Invoke-GraphApiRequest.ps1'
+# FileList = @()
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
