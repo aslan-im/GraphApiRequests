@@ -9,11 +9,12 @@ function New-GraphCertificate {
         [string]
         $StoreLocation = 'Cert:\CurrentUser\My',
 
+        [Parameter(Mandatory=$False)]
+        [string]
+        $CertificateOutputPath = "C:\Temp",
+
         [Parameter(Mandatory=$false)]
-        [ValidateScript({
-            ($_ -gt (Get-Date -Hour 0 -Minute 0 -Second 0).AddHours(23))
-        })]
-        [datetime]
+        [DateTime][ValidateScript({$_ -ge (Get-Date)})]
         $ExpirationDate = (Get-Date).AddYears(1),
 
         [Parameter(Mandatory=$false)]
@@ -21,7 +22,7 @@ function New-GraphCertificate {
         $FriendlyName = "GraphCert"
     )
     
-    $CreateCert = @{
+    $CreateCertSplat = @{
         FriendlyName = $FriendlyName
         DnsName = $TenantName
         CertStoreLocation = $StoreLocation
@@ -30,17 +31,17 @@ function New-GraphCertificate {
         KeySpec = "Signature"
         Provider = "Microsoft Enhanced RSA and AES Cryptographic Provider"
         HashAlgorithm = "SHA256"
+        ErrorAction = "Stop"
     }
    
-    $Certificate = New-SelfSignedCertificate @CreateCert
+    $Certificate = New-SelfSignedCertificate @CreateCertSplat
 
     $CertificatePath = Join-Path -Path $StoreLocation -ChildPath $Certificate.Thumbprint
 
-    $ExportPathCheck = "C:\Temp"
-    If (!(Test-Path -Path $ExportPathCheck)){
-        New-Item -ItemType Folder -Path $ExportPathCheck
+    If (!(Test-Path -Path $CertificateOutputPath)){
+        New-Item -ItemType Folder -Path $CertificateOutputPath
     }
     
-    $CerOutPath = "C:\Temp\$FriendlyName.cer"
-    Export-Certificate -Cert $CertificatePath -FilePath $CerOutPath | Out-Null
+    $CerOutPath = "$CertificateOutputPath\$FriendlyName.cer"
+    Export-Certificate -Cert $CertificatePath -FilePath $CerOutPath
 }
