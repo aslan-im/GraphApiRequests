@@ -1,4 +1,95 @@
 ### --- PUBLIC FUNCTIONS --- ###
+#Region - Get-GraphCertToken.ps1
+Function Get-GraphCertToken {
+
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]
+        $AppId, 
+
+        [Parameter(Mandatory=$true)]
+        [string]        
+        $TenantID,
+        
+        [Parameter(Mandatory=$true)]
+        [string]
+        $CertificatePath     
+    )
+
+    $Scope = "https://graph.microsoft.com/.default"
+
+    $Certificate = Get-Item $CertificatePath
+    $CertificateBase64Hash = [System.Convert]::ToBase64String($Certificate.GetCertHash())
+
+    $StartDate = (Get-Date "1970-01-01T00:00:00Z" ).ToUniversalTime()
+    $JWTExpirationTimeSpan = (New-TimeSpan -Start $StartDate -End (Get-Date).ToUniversalTime().AddMinutes(2)).TotalSeconds
+    $JWTExpiration = [math]::Round($JWTExpirationTimeSpan,0)
+
+    $NotBeforeExpirationTimeSpan = (New-TimeSpan -Start $StartDate -End ((Get-Date).ToUniversalTime())).TotalSeconds
+    $NotBefore = [math]::Round($NotBeforeExpirationTimeSpan,0)
+
+    $JWTHeader = @{
+        alg = "RS256"
+        typ = "JWT"
+        x5t = $CertificateBase64Hash -replace '\+','-' -replace '/','_' -replace '='
+    }
+
+    $JWTPayLoad = @{
+        aud = "https://login.microsoftonline.com/$TenantID/oauth2/token"
+        exp = $JWTExpiration
+        iss = $AppId
+        jti = [guid]::NewGuid()
+        nbf = $NotBefore
+        sub = $AppId
+    }
+
+    $JWTHeaderToByte = [System.Text.Encoding]::UTF8.GetBytes(($JWTHeader | ConvertTo-Json))
+    $EncodedHeader = [System.Convert]::ToBase64String($JWTHeaderToByte)
+
+    $JWTPayLoadToByte =  [System.Text.Encoding]::UTF8.GetBytes(($JWTPayload | ConvertTo-Json))
+    $EncodedPayload = [System.Convert]::ToBase64String($JWTPayLoadToByte)
+
+    $JWT = $EncodedHeader + "." + $EncodedPayload
+
+    $PrivateKey = $Certificate.PrivateKey
+
+    $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
+    $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
+
+    $Signature = [Convert]::ToBase64String(
+        $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
+    ) -replace '\+','-' -replace '/','_' -replace '='
+
+    $JWT = $JWT + "." + $Signature
+
+    $Body = @{
+        client_id = $AppId
+        client_assertion = $JWT
+        client_assertion_type = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+        scope = $Scope
+        grant_type = "client_credentials"
+
+    }
+
+    $Url = "https://login.microsoftonline.com/$TenantID/oauth2/v2.0/token"
+
+    $Header = @{
+        Authorization = "Bearer $JWT"
+    }
+
+    $PostSplat = @{
+        ContentType = 'application/x-www-form-urlencoded'
+        Method = 'POST'
+        Body = $Body
+        Uri = $Url
+        Headers = $Header
+    }
+
+    Invoke-RestMethod @PostSplat
+}
+Export-ModuleMember -Function Get-GraphCertToken
+#EndRegion - Get-GraphCertToken.ps1
 #Region - Get-GraphDeviceAuthToken.ps1
 <#
 .SYNOPSIS
@@ -336,6 +427,56 @@ function Invoke-GraphApiRequest {
 }
 Export-ModuleMember -Function Invoke-GraphApiRequest
 #EndRegion - Invoke-GraphApiRequest.ps1
+#Region - New-GraphCertificate.ps1
+function New-GraphCertificate {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)]
+        [String]
+        $TenantName,
+
+        [Parameter(Mandatory=$false)]
+        [string]
+        $StoreLocation = 'Cert:\CurrentUser\My',
+
+        [Parameter(Mandatory=$False)]
+        [string]
+        $CertificateOutputPath = "C:\Temp",
+
+        [Parameter(Mandatory=$false)]
+        [DateTime][ValidateScript({$_ -ge (Get-Date)})]
+        $ExpirationDate = (Get-Date).AddYears(1),
+
+        [Parameter(Mandatory=$false)]
+        [string]
+        $FriendlyName = "GraphCert"
+    )
+    
+    $CreateCertSplat = @{
+        FriendlyName = $FriendlyName
+        DnsName = $TenantName
+        CertStoreLocation = $StoreLocation
+        NotAfter = $ExpirationDate
+        KeyExportPolicy = "Exportable"
+        KeySpec = "Signature"
+        Provider = "Microsoft Enhanced RSA and AES Cryptographic Provider"
+        HashAlgorithm = "SHA256"
+        ErrorAction = "Stop"
+    }
+   
+    $Certificate = New-SelfSignedCertificate @CreateCertSplat
+
+    $CertificatePath = Join-Path -Path $StoreLocation -ChildPath $Certificate.Thumbprint
+
+    If (!(Test-Path -Path $CertificateOutputPath)){
+        New-Item -ItemType Folder -Path $CertificateOutputPath
+    }
+    
+    $CerOutPath = "$CertificateOutputPath\$FriendlyName.cer"
+    Export-Certificate -Cert $CertificatePath -FilePath $CerOutPath
+}
+Export-ModuleMember -Function New-GraphCertificate
+#EndRegion - New-GraphCertificate.ps1
 ### --- PRIVATE FUNCTIONS --- ###
 #Region - Get-GraphDeviceAuthCode.ps1
 function Get-GraphDeviceAuthCode {

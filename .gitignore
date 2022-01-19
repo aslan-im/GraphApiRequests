@@ -1,1 +1,3 @@
 Tests/*.xml
+Output/GraphApiRequests/0.1.29/en-US/*.xml
+Tests/*.xml
