@@ -59,7 +59,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+        with:
+          ref: Dev
 
       - name: Merge Dev -> master
         uses: devmasx/merge-branch@master
