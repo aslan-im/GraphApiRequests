@@ -16,6 +16,7 @@ Function Get-GraphCertToken {
         [string]
         $CertificatePath     
     )
+    
 
     $Scope = "https://graph.microsoft.com/.default"
 
@@ -54,12 +55,13 @@ Function Get-GraphCertToken {
 
     $PrivateKey = $Certificate.PrivateKey
 
-    $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
-    $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
+    # $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
+    # $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
 
-    $Signature = [Convert]::ToBase64String(
-        $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
-    ) -replace '\+','-' -replace '/','_' -replace '='
+    $Signature = Get-SignData -inputObject $PrivateKey -JWT $JWT
+    # $Signature = [Convert]::ToBase64String(
+    #     $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
+    # ) -replace '\+','-' -replace '/','_' -replace '='
 
     $JWT = $JWT + "." + $Signature
 
@@ -517,6 +519,27 @@ function Get-GraphDeviceAuthCode {
     
 }
 #EndRegion - Get-GraphDeviceAuthCode.ps1
+#Region - Get-SignData.ps1
+function Get-SignData {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$false)]
+        [System.Security.Cryptography.RSACng]
+        $InputObject,
+
+        [Parameter(Mandatory=$false)]
+        [string]
+        $JWT
+
+    )
+    $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
+    $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
+    
+    [Convert]::ToBase64String(
+        $InputObject.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
+    ) -replace '\+','-' -replace '/','_' -replace '='
+}
+#EndRegion - Get-SignData.ps1
 #Region - New-GraphAuthFormWindow.ps1
 function New-GraphAuthFormWindow {
     [CmdletBinding()]
