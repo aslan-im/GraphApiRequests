@@ -16,7 +16,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Checkout repo code
         uses: actions/checkout@v2
@@ -56,6 +56,7 @@ jobs:
           path: ./Output/ # Saving the powershell module artifact to the path ./Output/
   
   merge-branch:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
