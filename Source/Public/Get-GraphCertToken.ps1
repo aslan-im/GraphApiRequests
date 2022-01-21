@@ -14,6 +14,7 @@ Function Get-GraphCertToken {
         [string]
         $CertificatePath     
     )
+    . $PSScriptRoot\..\Private\Get-SignData.ps1
 
     $Scope = "https://graph.microsoft.com/.default"
 
@@ -52,12 +53,13 @@ Function Get-GraphCertToken {
 
     $PrivateKey = $Certificate.PrivateKey
 
-    $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
-    $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
+    # $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
+    # $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
 
-    $Signature = [Convert]::ToBase64String(
-        $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
-    ) -replace '\+','-' -replace '/','_' -replace '='
+    $Signature = Get-SignData -inputObject $PrivateKey -JWT $JWT
+    # $Signature = [Convert]::ToBase64String(
+    #     $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
+    # ) -replace '\+','-' -replace '/','_' -replace '='
 
     $JWT = $JWT + "." + $Signature
 
