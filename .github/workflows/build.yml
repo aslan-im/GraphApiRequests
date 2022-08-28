@@ -25,14 +25,14 @@ jobs:
         shell: pwsh
         run: |
           $Modules = @(
-            "Pester", "PSSCriptAnalyzer", "InvokeBuild"
+            "Pester", "PSSCriptAnalyzer", "InvokeBuild", "platyPS"
           )
           Set-PSRepository PSGallery -InstallationPolicy Trusted
           Install-Module $Modules -ErrorAction Stop
       
       - name: Invoke Build
         shell: pwsh
-        run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias"
+        run: pwsh -command "Invoke-Build -File ./build.ps1 -Configuration 'Release' -ExportAlias" -NugetAPIKey ${{ secrets.PSGALLERY }}
 
       - name: Perform a pester tests
         run: |
