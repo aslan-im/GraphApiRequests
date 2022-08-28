@@ -1,4 +1,15 @@
 function New-GraphCertificate {
+    <#
+    .SYNOPSIS
+        Function for generating new self signed Graph API auth certificate
+    .DESCRIPTION
+        After the creation, certificate can be used for authentication in Graph API
+    .NOTES
+        For running this function you require to provide TenantName (not an ID).
+    .EXAMPLE
+        New-GraphCertificate -TenantName 'Contoso' -StoreLocation 'Cert:\CurrentUser\Computer'
+        Generate new certificate and save in Cert:\CurrentUser\Computer
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]

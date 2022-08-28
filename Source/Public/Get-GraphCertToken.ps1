@@ -1,5 +1,18 @@
 Function Get-GraphCertToken {
-
+    <#
+    .SYNOPSIS
+        Function for generating token from certificate
+    .DESCRIPTION
+        This function uses the Certificate private part instead of Secret for getting the Token
+    .NOTES
+        Requires:
+            - App ID
+            - Tenatn ID
+            - Certificate Path
+    .EXAMPLE
+        Get-GraphCertToken -AppId 5265b837-2695-47c2-bc8a-12d064bab6af -TenantID c00b7c2b-ef1b-43f8-8798-2583cb4605db -CertificatePath Cert:\CurrentUser\Computer\3CF88F457CCCE9817ACDB658226031EA0664032B
+        Getting the Token by certificate
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
@@ -53,13 +66,7 @@ Function Get-GraphCertToken {
 
     $PrivateKey = $Certificate.PrivateKey
 
-    # $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
-    # $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
-
     $Signature = Get-SignData -inputObject $PrivateKey -JWT $JWT
-    # $Signature = [Convert]::ToBase64String(
-    #     $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
-    # ) -replace '\+','-' -replace '/','_' -replace '='
 
     $JWT = $JWT + "." + $Signature
 
