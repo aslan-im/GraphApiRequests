@@ -49,9 +49,6 @@ function Send-GraphEmail {
     )
 
     begin {
-        #requires -module GraphApiRequests
-        Import-module GraphApiRequests
-
         . $PSScriptRoot\..\private\New-GraphEmailObject.ps1
     }
     
