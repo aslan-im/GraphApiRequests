@@ -1,75 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="14" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-01-21" time="12:05:14">
-  <environment os-version="10.0.17763" cwd="D:\a\GraphApiRequests\GraphApiRequests" user-domain="fv-az30-198" platform="Microsoft Windows Server 2019 Datacenter|C:\Windows|\Device\Harddisk0\Partition2" nunit-version="2.5.8.0" user="runneradmin" machine-name="fv-az30-198" clr-version="Unknown" />
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="14" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-08-28" time="09:20:15">
+  <environment user-domain="fv-az282-261" clr-version="Unknown" machine-name="fv-az282-261" cwd="D:\a\GraphApiRequests\GraphApiRequests" user="runneradmin" nunit-version="2.5.8.0" platform="Microsoft Windows Server 2022 Datacenter|C:\Windows|\Device\Harddisk0\Partition2" os-version="10.0.20348" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="3.2919" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="3.6627" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphCertToken.Tests.ps1" executed="True" result="Success" success="True" time="0.7477" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphCertToken.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphCertToken.Tests.ps1" executed="True" result="Success" success="True" time="0.71" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphCertToken.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-GraphCertToken" executed="True" result="Success" success="True" time="0.2343" asserts="0" description="Get-GraphCertToken">
+          <test-suite type="TestFixture" name="Get-GraphCertToken" executed="True" result="Success" success="True" time="0.1498" asserts="0" description="Get-GraphCertToken">
             <results>
-              <test-case description="Returns True. All mandatory params are mandatory" name="Get-GraphCertToken.Returns True. All mandatory params are mandatory" time="0.1274" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns True. All mandatory params are mandatory" name="Get-GraphCertToken.Returns True. All mandatory params are mandatory" time="0.1121" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthCode.Tests.ps1" executed="True" result="Success" success="True" time="0.3396" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthCode.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthCode.Tests.ps1" executed="True" result="Success" success="True" time="0.4843" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthCode.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-GraphDeviceAuthCode" executed="True" result="Success" success="True" time="0.2396" asserts="0" description="Get-GraphDeviceAuthCode">
+          <test-suite type="TestFixture" name="Get-GraphDeviceAuthCode" executed="True" result="Success" success="True" time="0.2143" asserts="0" description="Get-GraphDeviceAuthCode">
             <results>
-              <test-case description="Returns predefined object" name="Get-GraphDeviceAuthCode.Returns predefined object" time="0.2345" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns predefined object" name="Get-GraphDeviceAuthCode.Returns predefined object" time="0.2096" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthToken.Tests.ps1" executed="True" result="Success" success="True" time="0.125" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthToken.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthToken.Tests.ps1" executed="True" result="Success" success="True" time="0.1155" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphDeviceAuthToken.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-GraphDeviceAuthToken" executed="True" result="Success" success="True" time="0.0808" asserts="0" description="Get-GraphDeviceAuthToken">
+          <test-suite type="TestFixture" name="Get-GraphDeviceAuthToken" executed="True" result="Success" success="True" time="0.0773" asserts="0" description="Get-GraphDeviceAuthToken">
             <results>
-              <test-case description="It returns token" name="Get-GraphDeviceAuthToken.It returns token" time="0.0444" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="It returns token" name="Get-GraphDeviceAuthToken.It returns token" time="0.0438" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphToken.Tests.ps1" executed="True" result="Success" success="True" time="0.1504" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphToken.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphToken.Tests.ps1" executed="True" result="Success" success="True" time="0.1765" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Get-GraphToken.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-GraphToken" executed="True" result="Success" success="True" time="0.0246" asserts="0" description="Get-GraphToken">
+          <test-suite type="TestFixture" name="Get-GraphToken" executed="True" result="Success" success="True" time="0.0363" asserts="0" description="Get-GraphToken">
             <results>
-              <test-case description="Returns token object" name="Get-GraphToken.Returns token object" time="0.009" asserts="0" success="True" result="Success" executed="True" />
-              <test-case description="All params should be True" name="Get-GraphToken.All params should be True" time="0.007" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Returns token object" name="Get-GraphToken.Returns token object" time="0.0231" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="All params should be True" name="Get-GraphToken.All params should be True" time="0.0058" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Invoke-GraphApiRequest.Tests.ps1" executed="True" result="Success" success="True" time="0.3535" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Invoke-GraphApiRequest.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\Invoke-GraphApiRequest.Tests.ps1" executed="True" result="Success" success="True" time="0.8882" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\Invoke-GraphApiRequest.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Invoke-GraphApiRequest" executed="True" result="Success" success="True" time="0.2802" asserts="0" description="Invoke-GraphApiRequest">
+          <test-suite type="TestFixture" name="Invoke-GraphApiRequest" executed="True" result="Success" success="True" time="0.8086" asserts="0" description="Invoke-GraphApiRequest">
             <results>
-              <test-suite type="TestFixture" name="Invoke-GraphApiRequest.Get function with Token" executed="True" result="Success" success="True" time="0.023" asserts="0" description="Invoke-GraphApiRequest.Get function with Token">
+              <test-suite type="TestFixture" name="Invoke-GraphApiRequest.Get function with Token" executed="True" result="Success" success="True" time="0.0207" asserts="0" description="Invoke-GraphApiRequest.Get function with Token">
                 <results>
-                  <test-case description="Returns predefined object " name="Invoke-GraphApiRequest.Get function with Token.Returns predefined object " time="0.0144" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Requires mandatory param" name="Invoke-GraphApiRequest.Get function with Token.Requires mandatory param" time="0.0045" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Returns predefined object " name="Invoke-GraphApiRequest.Get function with Token.Returns predefined object " time="0.0133" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Requires mandatory param" name="Invoke-GraphApiRequest.Get function with Token.Requires mandatory param" time="0.004" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
-              <test-suite type="TestFixture" name="Invoke-GraphApiRequest.Get Function without Token" executed="True" result="Success" success="True" time="0.211" asserts="0" description="Invoke-GraphApiRequest.Get Function without Token">
+              <test-suite type="TestFixture" name="Invoke-GraphApiRequest.Get Function without Token" executed="True" result="Success" success="True" time="0.12" asserts="0" description="Invoke-GraphApiRequest.Get Function without Token">
                 <results>
-                  <test-case description="Returns predefined object" name="Invoke-GraphApiRequest.Get Function without Token.Returns predefined object" time="0.0158" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Throw because of TenantID" name="Invoke-GraphApiRequest.Get Function without Token.Throw because of TenantID" time="0.1524" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Throw because of AppId" name="Invoke-GraphApiRequest.Get Function without Token.Throw because of AppId" time="0.008" asserts="0" success="True" result="Success" executed="True" />
-                  <test-case description="Throw because of AppSecret" name="Invoke-GraphApiRequest.Get Function without Token.Throw because of AppSecret" time="0.0077" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Returns predefined object" name="Invoke-GraphApiRequest.Get Function without Token.Returns predefined object" time="0.012" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Throw because of TenantID" name="Invoke-GraphApiRequest.Get Function without Token.Throw because of TenantID" time="0.0708" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Throw because of AppId" name="Invoke-GraphApiRequest.Get Function without Token.Throw because of AppId" time="0.0069" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Throw because of AppSecret" name="Invoke-GraphApiRequest.Get Function without Token.Throw because of AppSecret" time="0.0062" asserts="0" success="True" result="Success" executed="True" />
                 </results>
               </test-suite>
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\New-GraphCertificate.Tests.ps1" executed="True" result="Success" success="True" time="1.5757" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\New-GraphCertificate.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\GraphApiRequests\GraphApiRequests\Tests\New-GraphCertificate.Tests.ps1" executed="True" result="Success" success="True" time="1.2882" asserts="0" description="D:\a\GraphApiRequests\GraphApiRequests\Tests\New-GraphCertificate.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="New-GraphCertificate" executed="True" result="Success" success="True" time="1.5197" asserts="0" description="New-GraphCertificate">
+          <test-suite type="TestFixture" name="New-GraphCertificate" executed="True" result="Success" success="True" time="1.2521" asserts="0" description="New-GraphCertificate">
             <results>
-              <test-case description="Creates fake certificate" name="New-GraphCertificate.Creates fake certificate" time="0.1051" asserts="0" success="True" result="Success" executed="True" />
-              <test-case description="Throws because of ExpirationDate" name="New-GraphCertificate.Throws because of ExpirationDate" time="0.0251" asserts="0" success="True" result="Success" executed="True" />
-              <test-case description="Tenant name is mandatory" name="New-GraphCertificate.Tenant name is mandatory" time="0.0057" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Creates fake certificate" name="New-GraphCertificate.Creates fake certificate" time="0.1026" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Throws because of ExpirationDate" name="New-GraphCertificate.Throws because of ExpirationDate" time="0.0494" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Tenant name is mandatory" name="New-GraphCertificate.Tenant name is mandatory" time="0.0032" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
