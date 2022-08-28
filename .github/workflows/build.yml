@@ -1,15 +1,14 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Build
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   # push:
   #   branches: [ main ]
   pull_request:
     branches: [ dev ]
 
+  push:
+    branches: [ dev ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -67,5 +66,6 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
+          from_branch: Dev
           target_branch: master
           github_token: ${{ secrets.token }}
