@@ -27,7 +27,7 @@ Author = 'Aslan Imanalin'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 2021 Aslan Imanalin. All rights reserved.'
+Copyright = '(c) 2022 Aslan Imanalin. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Module for GraphApi requests invocation.'

@@ -87,14 +87,14 @@ task DebugBuild -if ($Configuration -eq "debug") {
     }
 
     Write-Verbose -Message "Updating Module Manifest with Public Functions"
-    $publicFunctions = Get-ChildItem -Path ".\Source\Public\*.ps1"
-    $privateFunctions = Get-ChildItem -Path ".\Source\Private\*.ps1"
+    $PublicFunctions = Get-ChildItem -Path ".\Source\Public\*.ps1"
+    $PrivateFunctions = Get-ChildItem -Path ".\Source\Private\*.ps1"
     try {
         Write-Verbose -Message "Appending Public functions to the psm file"
-        $functionsToExport = New-Object -TypeName System.Collections.ArrayList
-        foreach($function in $publicFunctions.Name){
-            write-Verbose -Message "Exporting function: $(($function.split('.')[0]).ToString())"
-            $functionsToExport.Add(($function.split('.')[0]).ToString())
+        $FunctionsToExport = New-Object -TypeName System.Collections.ArrayList
+        foreach($Function in $PublicFunctions.Name){
+            write-Verbose -Message "Exporting function: $(($Function.split('.')[0]).ToString())"
+            $FunctionsToExport.Add(($Function.split('.')[0]).ToString())
         }
         Update-ModuleManifest -Path ".\Output\temp\$($ModuleName)\$($ModuleVersion)\$($ModuleName).psd1" -FunctionsToExport $functionsToExport
     }
@@ -105,17 +105,17 @@ task DebugBuild -if ($Configuration -eq "debug") {
     Write-Verbose -Message "Building the .psm1 file"
     Write-Verbose -Message "Appending Public Functions"
     Add-Content -Path $ModuleFile -Value "### --- PUBLIC FUNCTIONS --- ###"
-    foreach($function in $publicFunctions.Name){
+    foreach($Function in $PublicFunctions.Name){
         try {
-            Write-Verbose -Message "Updating the .psm1 file with function: $($function)"
-            $content = Get-Content -Path ".\Source\Public\$($function)"
-            Add-Content -Path $ModuleFile -Value "#Region - $function"
+            Write-Verbose -Message "Updating the .psm1 file with function: $($Function)"
+            $Content = Get-Content -Path ".\Source\Public\$($Function)"
+            Add-Content -Path $ModuleFile -Value "#Region - $Function"
             Add-Content -Path $ModuleFile -Value $content
             if($ExportAlias.IsPresent){
                 $AliasSwitch = $false
                 $Sel = Select-String -Path ".\Source\Public\$($function)" -Pattern "CmdletBinding" -Context 0,1
                 $mylist = $Sel.ToString().Split([Environment]::NewLine)
-                foreach($s in $mylist){
+                foreach($s in $Mylist){
                     if($s -match "Alias"){
                         $alias = (($s.split(":")[2]).split("(")[1]).split(")")[0]
                         Write-Verbose -Message "Exporting Alias: $($alias) to Function: $($function)"
