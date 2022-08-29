@@ -335,10 +335,10 @@ task Publish -if($Configuration -eq "Release"){
     If((Get-Module -Name $ModuleName) -and ($NugetAPIKey)) {
         try {
             write-Verbose -Message "Publishing Module: $($ModuleName)"
-            Publish-Module -Name $ModuleName -NuGetApiKey $NugetAPIKey
+            Publish-Module -Name $ModuleName -NuGetApiKey $NugetAPIKey -ErrorAction Stop
         }
         catch {
-            throw "Failed publishing module to PowerShell Gallery"
+            throw "Failed publishing module to PowerShell Gallery. $($_.Exception)"
         }
     }
     else {
