@@ -12,7 +12,7 @@
 RootModule = 'GraphApiRequests.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.34'
+ModuleVersion = '0.1.35'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
