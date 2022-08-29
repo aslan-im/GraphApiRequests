@@ -12,7 +12,7 @@
 RootModule = 'GraphApiRequests.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.33'
+ModuleVersion = '0.1.34'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -112,7 +112,7 @@ PrivateData = @{
         ReleaseNotes = 'https://github.com/aslan-im/GraphApiRequests/blob/main/README.md'
 
         # Prerelease string of this module
-        Prerelease = '-beta'
+        Prerelease = 'beta'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false

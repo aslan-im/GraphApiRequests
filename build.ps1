@@ -335,7 +335,7 @@ task Publish -if($Configuration -eq "Release"){
     If((Get-Module -Name $ModuleName) -and ($NugetAPIKey)) {
         try {
             write-Verbose -Message "Publishing Module: $($ModuleName)"
-            Publish-Module -Name $ModuleName -NuGetApiKey $NugetAPIKey -ErrorAction Stop
+            Publish-Module -path ".\Output\$($ModuleName)\$ModuleVersion\" -NuGetApiKey $NugetAPIKey -ErrorAction Stop
         }
         catch {
             throw "Failed publishing module to PowerShell Gallery. $($_.Exception)"
@@ -346,4 +346,4 @@ task Publish -if($Configuration -eq "Release"){
     }
 }
 
-task . Init, Test, DebugBuild, Build, Clean
+task . Init, Test, DebugBuild, Build, Publish, Clean
