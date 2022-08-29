@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-GraphCertToken
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Function for generating token from certificate
 
 ## SYNTAX
 
@@ -17,16 +17,15 @@ Get-GraphCertToken [-AppId] <String> [-TenantID] <String> [-CertificatePath] <St
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+This function uses the Certificate private part instead of Secret for getting the Token
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-GraphCertToken -AppId 5265b837-2695-47c2-bc8a-12d064bab6af -TenantID c00b7c2b-ef1b-43f8-8798-2583cb4605db -CertificatePath Cert:\CurrentUser\Computer\3CF88F457CCCE9817ACDB658226031EA0664032B
+Getting the Token by certificate
+```
 
 ## PARAMETERS
 
@@ -39,22 +38,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CertificatePath
-{{ Fill CertificatePath Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -69,7 +53,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CertificatePath
+{{ Fill CertificatePath Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -80,11 +79,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+Requires:
+    - App ID
+    - Tenatn ID
+    - Certificate Path
 
 ## RELATED LINKS

@@ -1,7 +1,20 @@
 ### --- PUBLIC FUNCTIONS --- ###
 #Region - Get-GraphCertToken.ps1
 Function Get-GraphCertToken {
-
+    <#
+    .SYNOPSIS
+        Function for generating token from certificate
+    .DESCRIPTION
+        This function uses the Certificate private part instead of Secret for getting the Token
+    .NOTES
+        Requires:
+            - App ID
+            - Tenatn ID
+            - Certificate Path
+    .EXAMPLE
+        Get-GraphCertToken -AppId 5265b837-2695-47c2-bc8a-12d064bab6af -TenantID c00b7c2b-ef1b-43f8-8798-2583cb4605db -CertificatePath Cert:\CurrentUser\Computer\3CF88F457CCCE9817ACDB658226031EA0664032B
+        Getting the Token by certificate
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
@@ -55,13 +68,7 @@ Function Get-GraphCertToken {
 
     $PrivateKey = $Certificate.PrivateKey
 
-    # $RSAPadding = [Security.Cryptography.RSASignaturePadding]::Pkcs1
-    # $HashAlgorithm = [Security.Cryptography.HashAlgorithmName]::SHA256
-
     $Signature = Get-SignData -inputObject $PrivateKey -JWT $JWT
-    # $Signature = [Convert]::ToBase64String(
-    #     $PrivateKey.SignData([System.Text.Encoding]::UTF8.GetBytes($JWT),$HashAlgorithm,$RSAPadding)
-    # ) -replace '\+','-' -replace '/','_' -replace '='
 
     $JWT = $JWT + "." + $Signature
 
@@ -93,32 +100,32 @@ Function Get-GraphCertToken {
 Export-ModuleMember -Function Get-GraphCertToken
 #EndRegion - Get-GraphCertToken.ps1
 #Region - Get-GraphDeviceAuthToken.ps1
-<#
-.SYNOPSIS
-    Function to get a device authentication token.
-.DESCRIPTION
-    This function works only if your tenant satisfy the pre-requisites below:
-        - Registered Graph API application with required permissions (depends of the requests that you need)
-        - Enabled redirection for Mobile and desktop applications. More details here: https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal
-        - Configured redirect URL: https://localhost
-        - '"allowPublicClient": true' in application Manifest json
-.EXAMPLE
-    PS C:\> Get-GraphDeviceAuthToken -TenantName 'contoso' -AppId '246c7445-eee6-4d60-968d-f83d67183753' 
-    Getting the device auth token for Contoso tenant using application ID registered in Azure AD
-.PARAMETER TenantName 
-    You can find your tenant name using Azure AD  portal > Overview > Basic information > Name
-.PARAMETER AppId
-    Фpplication ID registered in Azure AD
-.INPUTS
-    None. You cannot pipe objects to Get-GraphDeviceAuthToke
-.OUTPUTS
-    System.Array. Returns the array with token
-.LINK
-    Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Get-GraphDeviceAuthToken.ps1
-.LINK 
-    Source code of whole project: https://github.com/aslan-im/GraphApiRequests
-#>
 function Get-GraphDeviceAuthToken {
+    <#
+    .SYNOPSIS
+        Function to get a device authentication token.
+    .DESCRIPTION
+        This function works only if your tenant satisfy the pre-requisites below:
+            - Registered Graph API application with required permissions (depends of the requests that you need)
+            - Enabled redirection for Mobile and desktop applications. More details here: https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal
+            - Configured redirect URL: https://localhost
+            - '"allowPublicClient": true' in application Manifest json
+    .EXAMPLE
+        PS C:\> Get-GraphDeviceAuthToken -TenantName 'contoso' -AppId '246c7445-eee6-4d60-968d-f83d67183753' 
+        Getting the device auth token for Contoso tenant using application ID registered in Azure AD
+    .PARAMETER TenantName 
+        You can find your tenant name using Azure AD  portal > Overview > Basic information > Name
+    .PARAMETER AppId
+        Фpplication ID registered in Azure AD
+    .INPUTS
+        None. You cannot pipe objects to Get-GraphDeviceAuthToke
+    .OUTPUTS
+        System.Array. Returns the array with token
+    .LINK
+        Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Get-GraphDeviceAuthToken.ps1
+    .LINK 
+        Source code of whole project: https://github.com/aslan-im/GraphApiRequests
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -189,25 +196,24 @@ function Get-GraphDeviceAuthToken {
 Export-ModuleMember -Function Get-GraphDeviceAuthToken
 #EndRegion - Get-GraphDeviceAuthToken.ps1
 #Region - Get-GraphToken.ps1
-<#
-.SYNOPSIS
-    Function for getting token using client secret
-.DESCRIPTION
-    For using this function you need to have a generated AppSecret (Client secret) in registered application in Azure AD
-.EXAMPLE
-    PS C:\> Get-GraphToken -AppId '246c7445-eee6-4d60-968d-f83d67183753' -AppSecret '6R[O)5D8sHZ^pt"3' -TenantId 'd1ee13a4-c9d0-4ab0-bff5-c011dfc20717'
-    Example of getting the token
-.INPUTS
-    None. You cannot pipe objects to Get-GraphDeviceAuthToke
-.OUTPUTS
-    Returns an array with token 
-.LINK
-    Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Get-GraphToken.ps1
-.LINK 
-    Source code of whole project: https://github.com/aslan-im/GraphApiRequests
-#>
 Function Get-GraphToken {
-
+    <#
+        .SYNOPSIS
+            Function for getting token using client secret
+        .DESCRIPTION
+            For using this function you need to have a generated AppSecret (Client secret) in registered application in Azure AD
+        .EXAMPLE
+            PS C:\> Get-GraphToken -AppId '246c7445-eee6-4d60-968d-f83d67183753' -AppSecret '6R[O)5D8sHZ^pt"3' -TenantId 'd1ee13a4-c9d0-4ab0-bff5-c011dfc20717'
+            Example of getting the token
+        .INPUTS
+            None. You cannot pipe objects to Get-GraphDeviceAuthToke
+        .OUTPUTS
+            Returns an array with token 
+        .LINK
+            Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Get-GraphToken.ps1
+        .LINK 
+            Source code of whole project: https://github.com/aslan-im/GraphApiRequests
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
@@ -256,45 +262,44 @@ Function Get-GraphToken {
 Export-ModuleMember -Function Get-GraphToken
 #EndRegion - Get-GraphToken.ps1
 #Region - Invoke-GraphApiRequest.ps1
-<#
-.SYNOPSIS
-    Function to invoke Graph API Request
-.DESCRIPTION
-    Using this function you can invoke any request to the Graph API both versions
-.EXAMPLE
-    PS C:\> $Token = Get-GraphToken -AppId 246c7445-eee6-4d60-968d-f83d67183753 -AppSecret ?2mwmHICkx8j -TenantID d1ee13a4-c9d0-4ab0-bff5-c011dfc20717
-    PS C:\> Invoke-GraphApiRequest -Token $Token -Resource groups -Method Get
-    Example of using Invoke-GraphApiRequest to get the list of Azure AD Groups. In this example first command is required to get the token using app secret.
-.EXAMPLE
-    PS C:\> $BodyObject = [PSCustomObject]@{
-        description = "Self help community for golf"
-        displayName = "Golf Assist"
-        groupTypes = @(
-            "Unified"
-        )
-        mailEnabled = $true
-        mailNickname = "golfassist"
-        securityenabled = $false
-    }
-    PS C:\> $BodyJson = ConvertTo-Json $BodyObject
-    PS C:\> $Token = Get-GraphToken -AppId 246c7445-eee6-4d60-968d-f83d67183753 -AppSecret ?2mwmHICkx8j -TenantID d1ee13a4-c9d0-4ab0-bff5-c011dfc20717
-    PS C:\> Invoke-GraphApiRequest -Token $Token -Resource groups -Method POST -Body $BodyJson
-    Steps in this example:
-        1. Creating a PSCustomObject with payload of MailEnalbed Security Group
-        2. Converting PSCustomObject to Json
-        3. Getting the token using Secret (if you already have a token and it is not expired, this step can be skipped)
-        4. Invoking a request to the Graph API for creating a new group with predefined properties   
-.INPUTS
-    None. You cannot pipe objects to Get-GraphDeviceAuthToke
-.OUTPUTS
-    Usually it is JSON
-.LINK
-    Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Invoke-GraphApiRequest.ps1
-.LINK 
-    Source code of whole project: https://github.com/aslan-im/GraphApiRequests
-#>
 function Invoke-GraphApiRequest {
-
+    <#
+    .SYNOPSIS
+        Function to invoke Graph API Request
+    .DESCRIPTION
+        Using this function you can invoke any request to the Graph API both versions
+    .EXAMPLE
+        PS C:\> $Token = Get-GraphToken -AppId 246c7445-eee6-4d60-968d-f83d67183753 -AppSecret ?2mwmHICkx8j -TenantID d1ee13a4-c9d0-4ab0-bff5-c011dfc20717
+        PS C:\> Invoke-GraphApiRequest -Token $Token -Resource groups -Method Get
+        Example of using Invoke-GraphApiRequest to get the list of Azure AD Groups. In this example first command is required to get the token using app secret.
+    .EXAMPLE
+        PS C:\> $BodyObject = [PSCustomObject]@{
+            description = "Self help community for golf"
+            displayName = "Golf Assist"
+            groupTypes = @(
+                "Unified"
+            )
+            mailEnabled = $true
+            mailNickname = "golfassist"
+            securityenabled = $false
+        }
+        PS C:\> $BodyJson = ConvertTo-Json $BodyObject
+        PS C:\> $Token = Get-GraphToken -AppId 246c7445-eee6-4d60-968d-f83d67183753 -AppSecret ?2mwmHICkx8j -TenantID d1ee13a4-c9d0-4ab0-bff5-c011dfc20717
+        PS C:\> Invoke-GraphApiRequest -Token $Token -Resource groups -Method POST -Body $BodyJson
+        Steps in this example:
+            1. Creating a PSCustomObject with payload of MailEnalbed Security Group
+            2. Converting PSCustomObject to Json
+            3. Getting the token using Secret (if you already have a token and it is not expired, this step can be skipped)
+            4. Invoking a request to the Graph API for creating a new group with predefined properties   
+    .INPUTS
+        None. You cannot pipe objects to Get-GraphDeviceAuthToke
+    .OUTPUTS
+        Usually it is JSON
+    .LINK
+        Source code of this function: https://github.com/aslan-im/GraphApiRequests/blob/main/Functions/Public/Invoke-GraphApiRequest.ps1
+    .LINK 
+        Source code of whole project: https://github.com/aslan-im/GraphApiRequests
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$false)]
@@ -431,6 +436,17 @@ Export-ModuleMember -Function Invoke-GraphApiRequest
 #EndRegion - Invoke-GraphApiRequest.ps1
 #Region - New-GraphCertificate.ps1
 function New-GraphCertificate {
+    <#
+    .SYNOPSIS
+        Function for generating new self signed Graph API auth certificate
+    .DESCRIPTION
+        After the creation, certificate can be used for authentication in Graph API
+    .NOTES
+        For running this function you require to provide TenantName (not an ID).
+    .EXAMPLE
+        New-GraphCertificate -TenantName 'Contoso' -StoreLocation 'Cert:\CurrentUser\Computer'
+        Generate new certificate and save in Cert:\CurrentUser\Computer
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]

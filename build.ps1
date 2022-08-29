@@ -295,7 +295,7 @@ task Build -if($Configuration -eq "Release"){
     }
 
     if(!(Get-ChildItem -Path ".\Docs")){
-        Write-Verbose -Message "Docs folder is empty, generating new fiiles"
+        Write-Verbose -Message "Docs folder is empty, generating new files"
         if(Get-Module -Name $($ModuleName)) {
             Write-Verbose -Message "Module: $($ModuleName) is imported into session, generating Help Files"
             New-MarkdownHelp -Module $ModuleName -OutputFolder ".\Docs"
@@ -335,10 +335,10 @@ task Publish -if($Configuration -eq "Release"){
     If((Get-Module -Name $ModuleName) -and ($NugetAPIKey)) {
         try {
             write-Verbose -Message "Publishing Module: $($ModuleName)"
-            Publish-Module -Name $ModuleName -NuGetApiKey $NugetAPIKey
+            Publish-Module -Name $ModuleName -NuGetApiKey $NugetAPIKey -ErrorAction Stop
         }
         catch {
-            throw "Failed publishing module to PowerShell Gallery"
+            throw "Failed publishing module to PowerShell Gallery. $($_.Exception)"
         }
     }
     else {
@@ -346,4 +346,4 @@ task Publish -if($Configuration -eq "Release"){
     }
 }
 
-task . Init, Test, DebugBuild, Build, Clean 
+task . Init, Test, DebugBuild, Build, Clean

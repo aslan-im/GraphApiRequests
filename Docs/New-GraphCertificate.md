@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-GraphCertificate
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Function for generating new self signed Graph API auth certificate
 
 ## SYNTAX
 
@@ -18,59 +18,28 @@ New-GraphCertificate [-TenantName] <String> [[-StoreLocation] <String>] [[-Certi
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+After the creation, certificate can be used for authentication in Graph API
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+New-GraphCertificate -TenantName 'Contoso' -StoreLocation 'Cert:\CurrentUser\Computer'
+Generate new certificate and save in Cert:\CurrentUser\Computer
+```
 
 ## PARAMETERS
 
-### -CertificateOutputPath
-{{ Fill CertificateOutputPath Description }}
+### -TenantName
+{{ Fill TenantName Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExpirationDate
-{{ Fill ExpirationDate Description }}
-
-```yaml
-Type: DateTime
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FriendlyName
-{{ Fill FriendlyName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -85,23 +54,53 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
-Default value: None
+Position: 2
+Default value: Cert:\CurrentUser\My
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TenantName
-{{ Fill TenantName Description }}
+### -CertificateOutputPath
+{{ Fill CertificateOutputPath Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 0
-Default value: None
+Required: False
+Position: 3
+Default value: C:\Temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExpirationDate
+{{ Fill ExpirationDate Description }}
+
+```yaml
+Type: DateTime
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: (Get-Date).AddYears(1)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FriendlyName
+{{ Fill FriendlyName Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: GraphCert
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -111,11 +110,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
+For running this function you require to provide TenantName (not an ID).
 
 ## RELATED LINKS
