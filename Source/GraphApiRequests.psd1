@@ -12,7 +12,7 @@
 RootModule = 'GraphApiRequests.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.34'
+ModuleVersion = '0.1.35'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@ Author = 'Aslan Imanalin'
 CompanyName = ''
 
 # Copyright statement for this module
-Copyright = '(c) 2021 Aslan Imanalin. All rights reserved.'
+Copyright = '(c) 2022 Aslan Imanalin. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'Module for GraphApi requests invocation.'
